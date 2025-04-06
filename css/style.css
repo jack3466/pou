@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&family=Kanit:wght@300;400;500;600&display=swap");
 
-:root {
+/* :root {
   --color-body: #b6cbce;
   --color-heading: #eef3db;
   --color-base: #057786;
@@ -9,20 +9,19 @@
   --color-brand2: rgba(0, 255, 234, 0.699);
   --sidbar-width: 240px;
   --font-base: "Kanit";
-}
-/* :root {
-  --color-body: #f5f5f5;          /* Light grayish white for body background */
-/*   --color-heading: #ffffff;       /* Pure white for headings */ */
-/*   --color-base: #1a1a1a;          /* Deep charcoal for primary text or UI elements */ */
-/*   --color-base2: #000000;         /* Pure black for strong backgrounds */ */
-/*   --color-brand: #ffffff;         /* White as a clean accent or button text */ */
-/*   --color-brand2: rgba(255, 255, 255, 0.8); /* Soft white overlay or hover effect */ */
-/*   --sidbar-width: 240px;
+} */
+:root {
+  --color-body: #f5f5f5;         
+  --color-heading: #ffffff;   
+  --color-base: #1a1a1a;        
+  --color-base2: #000000;         
+  --color-brand: #ffffff;         
+  --color-brand2: rgba(255, 255, 255, 0.8);
+   --sidbar-width: 240px;
   --font-base: "Kanit", sans-serif;
 }
- */ */
-
-body {
+ */
+body { */
   background-color: var(--color-base2);
   color: var(--color-body);
   font-family: var(--font-base);
