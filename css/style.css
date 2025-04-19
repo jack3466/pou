@@ -2,7 +2,7 @@
 
 :root {
   --color-body: #b6cbce;
-  --color-heading: #eef3db;
+  --color-heading: #3eeef3;
   --color-base: #057786;
   --color-base2: #022a30;
   --color-brand: rgb(0, 255, 234);
@@ -10,7 +10,7 @@
   --sidbar-width: 240px;
   --font-base: "Kanit";
 }
-:root {
+/* :root {
   --color-body: #f5f5f5;         
   --color-heading: #ffffff;   
   --color-base: #1a1a1a;        
@@ -20,7 +20,7 @@
    --sidbar-width: 240px;
   --font-base: "Kanit", sans-serif;
 }
- 
+  */
 body { 
   background-color: var(--color-base2);
   color: var(--color-body);
