@@ -1,4 +1,58 @@
-@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&family=Kanit:wght@300;400;500;600&display=swap");
+:root {
+  --color-body: #ffffff; /* Bright neon text color */
+  --color-heading: #39ff14; /* Neon green for headings */
+  --color-base: #000000; /* Dark background */
+  --color-base2: #1a1a1a; /* Slightly lighter dark for contrast */
+  --color-brand: #ff007f; /* Neon pink for links */
+  --color-brand2: rgba(255, 0, 127, 0.7); /* Semi-transparent neon pink */
+  --sidbar-width: 240px;
+  --font-base: "Kanit", sans-serif;
+}
+
+body { 
+  background-color: var(--color-base);
+  color: var(--color-body);
+  font-family: var(--font-base);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-heading);
+  text-shadow: 0 0 5px var(--color-heading), 0 0 10px var(--color-heading);
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-brand);
+  text-shadow: 0 0 5px var(--color-brand), 0 0 10px var(--color-brand);
+  transition: all 0.4s ease;
+}
+
+a:hover {
+  color: var(--color-brand2);
+  text-shadow: 0 0 10px var(--color-brand2), 0 0 20px var(--color-brand2);
+}
+
+.navbar {
+  background-color: var(--color-base2);
+}
+
+#contact .form-control {
+  background-color: var(--color-base2);
+  color: var(--color-body);
+  border-color: var(--color-base);
+}
+
+#contact .form-control::placeholder {
+  color: var(--color-body);
+}
+
+
+
+
+
+
+/* @import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&family=Kanit:wght@300;400;500;600&display=swap");
 
 :root {
   --color-body: #b6cbce;
@@ -227,3 +281,4 @@ img {
     display: block;
   }
 }
+ */
