@@ -9,18 +9,19 @@
   --font-base: "Kanit", sans-serif;
 }
 
-body { 
-  background-color: var(--color-base);
-  color: var(--color-body);
-  font-family: var(--font-base);
+body {
+  background-color: #000; /* Dark background */
+  color: #fff; /* Bright text color */
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--color-heading);
-  text-shadow: 0 0 5px var(--color-heading), 0 0 10px var(--color-heading);
-  font-weight: 700;
+h1, h2, h3, h4, h5, h6, p {
+  color: #39ff14; /* Neon green for headings and text */
+  text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14; /* Glowing effect */
 }
 
+.bg-base {
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background for contrast */
+}
 a {
   text-decoration: none;
   color: var(--color-brand);
