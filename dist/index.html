@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shaik Ummar Farooq | 3D Interactive Portfolio</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="3D Interactive portfolio of Shaik Ummar Farooq, an MBA Candidate, Team Lead, and Tech Enthusiast specializing in business strategy and web technologies." />
+  <meta name="keywords" content="Shaik Ummar Farooq, Portfolio, 3D Portfolio, WebGL, ThreeJS, MBA, Statistics, Python, Django" />
+  <meta name="author" content="Shaik Ummar Farooq" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Shaik Ummar Farooq | 3D Interactive Portfolio" />
+  <meta property="og:description" content="Experience a fully interactive 3D WebGL portfolio detailing education, projects, and achievements." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- CSS Stylesheets -->
+  
+  
+  
+  
+  <script type="module" crossorigin src="/assets/index-0f58ee81.js"></script>
+  <link rel="stylesheet" href="/assets/index-53af907c.css">
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+
+  <!-- Background WebGL Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- NAV BAR / HEADER -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold h3 m-0 text-brand text-gradient" href="#home">Shaik Ummar Farooq</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto text-center gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#work">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+          <li class="nav-item ms-lg-3 d-flex align-items-center justify-content-center gap-2 mt-3 mt-lg-0">
+            <button id="btn-style-1" class="btn btn-outline-brand btn-sm py-1 px-3 active">Minimal</button>
+            <button id="btn-style-2" class="btn btn-brand btn-sm py-1 px-3">Interactive 3D</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- //NAV BAR -->
+
+  <!-- CONTENT WRAPPER -->
+  <div id="content-wrapper">
+
+    <!-- HOME SECTION -->
+    <section id="home" class="full-hight px-3 px-lg-5">
+      <div class="container text-center text-lg-start">
+        <div class="row align-items-center min-vh-100">
+          <div class="col-lg-8 py-5">
+            <h1 class="text-uppercase display-3 fw-bold text-white mb-2" data-aos="fade-up">
+              Hi, I'm <span class="text-brand text-gradient">Shaik Ummar Farooq</span>
+            </h1>
+            <h2 class="h3 fw-medium text-white mb-4" data-aos="fade-up" data-aos-delay="150">
+              I am a <span class="typewriter-text text-brand"></span>
+            </h2>
+            <p class="lead mt-2 mb-5 fs-4 text-secondary" data-aos="fade-up" data-aos-delay="300">
+              Chasing my dreams
+            </p>
+            <div data-aos="fade-up" data-aos-delay="450" class="d-flex flex-wrap justify-content-center justify-content-lg-start align-items-center gap-3">
+              <a href="#work" class="btn btn-brand py-3 px-4">Explore My Work</a>
+              <a href="#contact" class="btn btn-outline-brand py-3 px-4">Contact Me</a>
+              <a href="tel:+918125763466" class="custom-link ms-md-3"><i class="las la-phone me-1"></i> +91 8125763466</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- //HOME SECTION -->
+
+
+
+    <!-- PROJECTS SECTION -->
+    <section id="work" class="full-hight px-3 px-lg-5">
+      <div class="container">
+        <div class="row mb-5 text-center text-lg-start">
+          <div class="col-md-8" data-aos="fade-up">
+            <h6 class="text-brand text-uppercase tracking-wider">Showcase</h6>
+            <h1 class="display-5 fw-bold text-white">My Projects & Work</h1>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <!-- Project 1: Stuehub -->
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="card rounded-4 bg-base shadow-effect border-0 h-100 overflow-hidden">
+              <div class="card-content p-4 d-flex flex-column h-100">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <h3 class="h4 text-white m-0">stuehub.com</h3>
+                  <span class="badge tech-tag">React & Node.js</span>
+                </div>
+                <p class="text-secondary mb-4">
+                  A comprehensive digital learning hub and collaboration platform designed for students. Enables resource sharing, interactive discussion boards, and study group management.
+                </p>
+                <div class="d-flex gap-2 mt-auto align-items-center justify-content-between">
+                  <div class="d-flex gap-2">
+                    <span class="badge bg-dark-accent">EduTech</span>
+                    <span class="badge bg-dark-accent">Community</span>
+                  </div>
+                  <a href="https://stuehub.com" target="_blank" class="custom-link"><i class="las la-external-link-alt"></i> Visit Site</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: MR Engineering Works -->
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="card rounded-4 bg-base shadow-effect border-0 h-100 overflow-hidden">
+              <div class="card-content p-4 d-flex flex-column h-100">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <h3 class="h4 text-white m-0">mr-engineeringworks.com</h3>
+                  <span class="badge tech-tag">Python & Flask</span>
+                </div>
+                <p class="text-secondary mb-4">
+                  An online business and inventory portal for industrial engineering services. Streamlines request-for-quotes, machine component catalogues, and client order tracking.
+                </p>
+                <div class="d-flex gap-2 mt-auto align-items-center justify-content-between">
+                  <div class="d-flex gap-2">
+                    <span class="badge bg-dark-accent">B2B Portal</span>
+                    <span class="badge bg-dark-accent">Industrial</span>
+                  </div>
+                  <a href="https://mr-engineeringworks.com" target="_blank" class="custom-link"><i class="las la-external-link-alt"></i> Visit Site</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: AL Designs & Constructions -->
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="card rounded-4 bg-base shadow-effect border-0 h-100 overflow-hidden">
+              <div class="card-content p-4 d-flex flex-column h-100">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <h3 class="h4 text-white m-0">al-designsconstructions.com</h3>
+                  <span class="badge tech-tag">Next.js & Tailwind</span>
+                </div>
+                <p class="text-secondary mb-4">
+                  A high-fidelity architectural portfolio and project tracker showing structural blueprints, material calculators, and live milestone updates for ongoing constructions.
+                </p>
+                <div class="d-flex gap-2 mt-auto align-items-center justify-content-between">
+                  <div class="d-flex gap-2">
+                    <span class="badge bg-dark-accent">Real Estate</span>
+                    <span class="badge bg-dark-accent">Architectural</span>
+                  </div>
+                  <a href="https://al-designsconstructions.com" target="_blank" class="custom-link"><i class="las la-external-link-alt"></i> Visit Site</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: Royal Furnishing Store -->
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="card rounded-4 bg-base shadow-effect border-0 h-100 overflow-hidden">
+              <div class="card-content p-4 d-flex flex-column h-100">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <h3 class="h4 text-white m-0">royalfurnishingstore.com</h3>
+                  <span class="badge tech-tag">Django & SQL</span>
+                </div>
+                <p class="text-secondary mb-4">
+                  A responsive e-commerce application equipped with a customizable catalog search, dynamic cart management, and secure checkout systems for home decor and furnishings.
+                </p>
+                <div class="d-flex gap-2 mt-auto align-items-center justify-content-between">
+                  <div class="d-flex gap-2">
+                    <span class="badge bg-dark-accent">E-commerce</span>
+                    <span class="badge bg-dark-accent">Inventory</span>
+                  </div>
+                  <a href="https://royalfurnishingstore.com" target="_blank" class="custom-link"><i class="las la-external-link-alt"></i> Visit Site</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- //PROJECTS SECTION -->
+
+
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="full-hight px-3 px-lg-5">
+      <div class="container">
+        <div class="row mb-5 text-center justify-content-center">
+          <div class="col-md-8" data-aos="fade-up">
+            <h6 class="text-brand text-uppercase tracking-wider">Get In Touch</h6>
+            <h1 class="display-5 fw-bold text-white mb-3">Contact Me</h1>
+            <a href="mailto:ummar1852@gmail.com" class="h3 text-brand text-gradient text-break">ummar1852@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="300">
+            <form id="contactForm" class="row g-3" onsubmit="handleContactSubmit(event)">
+              <div class="form-group col-md-6">
+                <input type="text" id="contactName" class="form-control bg-base border-0 py-3 px-4 rounded-3 text-white" placeholder="Enter your name" required />
+              </div>
+              <div class="form-group col-md-6">
+                <input type="email" id="contactEmail" class="form-control bg-base border-0 py-3 px-4 rounded-3 text-white" placeholder="Enter your email" required />
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="text" id="contactSubject" class="form-control bg-base border-0 py-3 px-4 rounded-3 text-white" placeholder="Enter subject" required />
+              </div>
+              <div class="col-md-12 form-group">
+                <textarea id="contactMessage" rows="5" class="form-control bg-base border-0 py-3 px-4 rounded-3 text-white" placeholder="Enter your message" required></textarea>
+              </div>
+
+              <div class="col-md-12 form-group d-grid">
+                <button type="submit" class="btn btn-brand py-3">Send Message <i class="las la-paper-plane ms-2"></i></button>
+              </div>
+            </form>
+            <div id="formFeedback" class="mt-3 alert d-none text-center"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- //CONTACT SECTION -->
+
+    <!-- FOOTER -->
+    <footer class="px-3 px-lg-5 py-4 bg-base border-top border-dark">
+      <div class="container">
+        <div class="row align-items-center justify-content-between gy-3 text-center text-md-start">
+          <div class="col-md-auto mb-0">
+            <p class="m-0 text-secondary">&copy; 2026 Shaik Ummar Farooq. All Rights Reserved.</p>
+          </div>
+          <div class="social-icons col-md-auto d-flex justify-content-center gap-2">
+            <a href="mailto:ummar1852@gmail.com" class="social-btn" title="Email"><i class="las la-envelope"></i></a>
+            <a href="tel:+918125763466" class="social-btn" title="Call"><i class="las la-phone"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- //FOOTER -->
+
+  </div>
+  <!--//CONTENT WRAPPER -->
+
+  <!-- JS Scripts -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/aos.js"></script>
+  
+</body>
+
+</html>
