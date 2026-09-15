@@ -1,30 +1,13 @@
 import * as THREE from 'three';
 
-// State Variables
-let scene, camera, renderer, clock, animationFrameId = null;
-let glassIcosahedrons, glassSpheres, glassTetrahedrons, starField;
-let cyanLight, purpleLight;
-
-const items = [];
-const dummy = new THREE.Object3D();
+let scene, camera, renderer, animationFrameId = null;
+let particleSystem, clock;
+let mouseX = 0, mouseY = 0;
+let targetX = 0, targetY = 0;
 let isInitialized = false;
 
-// Viewport sizes
-let aspect = window.innerWidth / window.innerHeight;
-let vHeight = 0;
-let vWidth = 0;
-
-// Mouse coordinates
-let mouseX = 0;
-let mouseY = 0;
-let targetMouseX = 0;
-let targetMouseY = 0;
-
-// Total shapes count: 400
-const icosahedronsCount = 130;
-const spheresCount = 140;
-const tetrahedronsCount = 130;
-const starsCount = 1000;
+const PARTICLE_COUNT = 1200;
+let positions, initialY;
 
 export function initWebGL() {
   const canvas = document.querySelector("#bg-canvas");
@@ -32,276 +15,188 @@ export function initWebGL() {
 
   // Scene & Camera
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.z = 240;
+  camera.position.y = 80;
+  camera.rotation.x = -0.3;
+
   renderer = new THREE.WebGLRenderer({
     canvas: canvas,
-    alpha: true,
-    antialias: true
+    alpha: false,
+    antialias: true,
+    powerPreference: "high-performance"
   });
-  
+  renderer.setClearColor(0x000000, 1);
+
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.0;
-  camera.position.z = 8;
+
   clock = new THREE.Clock();
 
-  // Cinematic Lighting
-  const ambientLight = new THREE.AmbientLight(0x05070a, 1.2);
-  scene.add(ambientLight);
+  // Create an undulating grid of particles (Aurora Wave)
+  const geometry = new THREE.BufferGeometry();
+  positions = new Float32Array(PARTICLE_COUNT * 3);
+  initialY = new Float32Array(PARTICLE_COUNT);
+  const colors = new Float32Array(PARTICLE_COUNT * 3);
 
-  // Orbiting Neon Cyan Light
-  cyanLight = new THREE.PointLight(0x00f2fe, 10, 45);
-  scene.add(cyanLight);
+  const cols = 40;
+  const rows = 30;
+  const spacingX = 14;
+  const spacingZ = 12;
 
-  // Orbiting Electric Purple Light
-  purpleLight = new THREE.PointLight(0xB026FF, 10, 45);
-  scene.add(purpleLight);
+  let idx = 0;
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      const x = (i - cols / 2) * spacingX;
+      const z = (j - rows / 2) * spacingZ;
+      const y = Math.sin(i * 0.3) * 12 + Math.cos(j * 0.3) * 12;
 
-  // Glass-like Material (MeshPhysicalMaterial)
-  const glassMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0x111625,
-    metalness: 0.8,      // High reflectivity
-    roughness: 0.1,      // Glossy finish
-    transparent: true,
-    opacity: 0.5,
-    transmission: 0.9,   // Transparent glass-like transmission
-    ior: 1.52,           // Index of refraction
-    thickness: 0.7,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.1,
-    side: THREE.DoubleSide
-  });
+      positions[idx * 3] = x;
+      positions[idx * 3 + 1] = y;
+      positions[idx * 3 + 2] = z;
 
-  // Geometries
-  const icosahedronGeometry = new THREE.IcosahedronGeometry(0.25, 0);
-  const sphereGeometry = new THREE.SphereGeometry(0.15, 16, 16);
-  const tetrahedronGeometry = new THREE.TetrahedronGeometry(0.22, 0);
-  
-  // Instanced Meshes for high performance (400 items total)
-  glassIcosahedrons = new THREE.InstancedMesh(icosahedronGeometry, glassMaterial, icosahedronsCount);
-  glassSpheres = new THREE.InstancedMesh(sphereGeometry, glassMaterial, spheresCount);
-  glassTetrahedrons = new THREE.InstancedMesh(tetrahedronGeometry, glassMaterial, tetrahedronsCount);
-  
-  scene.add(glassIcosahedrons);
-  scene.add(glassSpheres);
-  scene.add(glassTetrahedrons);
+      initialY[idx] = y;
 
-  // Background Stars
-  const starGeometry = new THREE.BufferGeometry();
-  const starPositions = new Float32Array(starsCount * 3);
-  for (let i = 0; i < starsCount * 3; i += 3) {
-    starPositions[i] = (Math.random() - 0.5) * 35;
-    starPositions[i + 1] = (Math.random() - 0.5) * 35;
-    starPositions[i + 2] = -5 - Math.random() * 8;
+      // Constellation Stardust Palette:
+      // Deep Indigo (#4f46e5) -> Violet (#7c3aed) -> Azure (#22d3ee) -> Warm Amber (#f59e0b)
+      const ratio = (i + j) / (cols + rows);
+      // Blend: indigo (0.31, 0.27, 0.90) -> violet (0.49, 0.23, 0.93) -> azure (0.13, 0.83, 0.93) -> amber (0.96, 0.62, 0.04)
+      let r, g, b;
+      if (ratio < 0.33) {
+        const t = ratio / 0.33;
+        r = 0.31 + (0.49 - 0.31) * t;
+        g = 0.27 + (0.23 - 0.27) * t;
+        b = 0.90 + (0.93 - 0.90) * t;
+      } else if (ratio < 0.66) {
+        const t = (ratio - 0.33) / 0.33;
+        r = 0.49 + (0.13 - 0.49) * t;
+        g = 0.23 + (0.83 - 0.23) * t;
+        b = 0.93 + (0.93 - 0.93) * t;
+      } else {
+        const t = (ratio - 0.66) / 0.34;
+        r = 0.13 + (0.96 - 0.13) * t;
+        g = 0.83 + (0.62 - 0.83) * t;
+        b = 0.93 + (0.04 - 0.93) * t;
+      }
+
+      colors[idx * 3] = r;
+      colors[idx * 3 + 1] = g;
+      colors[idx * 3 + 2] = b;
+
+      idx++;
+    }
   }
-  starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-  const starMaterial = new THREE.PointsMaterial({
-    size: 0.03,
-    color: 0x4facfe,
+
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  // Circular glow texture for soft particles
+  const canvasTexture = createCircleTexture();
+  const material = new THREE.PointsMaterial({
+    size: 3.5,
+    vertexColors: true,
     transparent: true,
-    opacity: 0.5
+    opacity: 0.78,
+    map: canvasTexture,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
   });
-  starField = new THREE.Points(starGeometry, starMaterial);
-  scene.add(starField);
 
-  // Setup boundaries
-  updateBoundaries();
-  initPositions();
+  particleSystem = new THREE.Points(geometry, material);
+  scene.add(particleSystem);
 
-  // Listeners
-  window.addEventListener('mousemove', handleMouseMove);
-  window.addEventListener('resize', handleResize);
+  // Subtle floating background star dust — soft indigo-violet shimmer
+  const starGeo = new THREE.BufferGeometry();
+  const starCount = 300;
+  const starPositions = new Float32Array(starCount * 3);
+  for (let i = 0; i < starCount * 3; i += 3) {
+    starPositions[i] = (Math.random() - 0.5) * 600;
+    starPositions[i + 1] = Math.random() * 300 - 50;
+    starPositions[i + 2] = (Math.random() - 0.5) * 500;
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+  const starMat = new THREE.PointsMaterial({
+    size: 1.8,
+    color: 0x818cf8,
+    transparent: true,
+    opacity: 0.50,
+    map: canvasTexture,
+    blending: THREE.AdditiveBlending
+  });
+  const stars = new THREE.Points(starGeo, starMat);
+  scene.add(stars);
+
+  window.addEventListener('mousemove', onMouseMove, { passive: true });
+  window.addEventListener('resize', onResize, { passive: true });
 
   isInitialized = true;
+  tick();
 }
 
-function updateBoundaries() {
-  aspect = window.innerWidth / window.innerHeight;
-  vHeight = 8 * Math.tan((camera.fov * Math.PI) / 360);
-  vWidth = vHeight * aspect;
+function createCircleTexture() {
+  const c = document.createElement('canvas');
+  c.width = 32;
+  c.height = 32;
+  const ctx = c.getContext('2d');
+  const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+  gradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.8)');
+  gradient.addColorStop(0.7, 'rgba(255, 255, 255, 0.2)');
+  gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 32, 32);
+
+  const texture = new THREE.Texture(c);
+  texture.needsUpdate = true;
+  return texture;
 }
 
-function initPositions() {
-  items.length = 0;
-  
-  // Icosahedrons
-  for (let i = 0; i < icosahedronsCount; i++) {
-    items.push({
-      type: 'icosahedron',
-      index: i,
-      x: (Math.random() - 0.5) * vWidth * 2.2,
-      y: (Math.random() - 0.5) * vHeight * 2.2,
-      z: (Math.random() - 0.5) * 5,
-      vx: (Math.random() - 0.5) * 0.004,
-      vy: 0.006 + Math.random() * 0.010, // upward drift
-      vz: (Math.random() - 0.5) * 0.004,
-      rx: Math.random() * Math.PI,
-      ry: Math.random() * Math.PI,
-      rz: Math.random() * Math.PI,
-      rvx: (Math.random() - 0.5) * 0.015, // rotational speeds
-      rvy: (Math.random() - 0.5) * 0.015,
-      rvz: (Math.random() - 0.5) * 0.015,
-      scale: 0.7 + Math.random() * 0.6,
-      ox: 0,
-      oy: 0,
-      oz: 0
-    });
-  }
-
-  // Spheres
-  for (let i = 0; i < spheresCount; i++) {
-    items.push({
-      type: 'sphere',
-      index: i,
-      x: (Math.random() - 0.5) * vWidth * 2.2,
-      y: (Math.random() - 0.5) * vHeight * 2.2,
-      z: (Math.random() - 0.5) * 5,
-      vx: (Math.random() - 0.5) * 0.004,
-      vy: 0.004 + Math.random() * 0.008,
-      vz: (Math.random() - 0.5) * 0.004,
-      rx: Math.random() * Math.PI,
-      ry: Math.random() * Math.PI,
-      rz: Math.random() * Math.PI,
-      rvx: (Math.random() - 0.5) * 0.01,
-      rvy: (Math.random() - 0.5) * 0.01,
-      rvz: (Math.random() - 0.5) * 0.01,
-      scale: 0.6 + Math.random() * 0.7,
-      ox: 0,
-      oy: 0,
-      oz: 0
-    });
-  }
-
-  // Tetrahedrons
-  for (let i = 0; i < tetrahedronsCount; i++) {
-    items.push({
-      type: 'tetrahedron',
-      index: i,
-      x: (Math.random() - 0.5) * vWidth * 2.2,
-      y: (Math.random() - 0.5) * vHeight * 2.2,
-      z: (Math.random() - 0.5) * 5,
-      vx: (Math.random() - 0.5) * 0.004,
-      vy: 0.005 + Math.random() * 0.009,
-      vz: (Math.random() - 0.5) * 0.004,
-      rx: Math.random() * Math.PI,
-      ry: Math.random() * Math.PI,
-      rz: Math.random() * Math.PI,
-      rvx: (Math.random() - 0.5) * 0.018,
-      rvy: (Math.random() - 0.5) * 0.018,
-      rvz: (Math.random() - 0.5) * 0.018,
-      scale: 0.6 + Math.random() * 0.6,
-      ox: 0,
-      oy: 0,
-      oz: 0
-    });
-  }
+function onMouseMove(event) {
+  mouseX = (event.clientX / window.innerWidth - 0.5) * 80;
+  mouseY = (event.clientY / window.innerHeight - 0.5) * 50;
 }
 
-function handleMouseMove(event) {
-  // Calculate NDC (Normalized Device Coordinates)
-  const nx = (event.clientX / window.innerWidth - 0.5) * 2;
-  const ny = -(event.clientY / window.innerHeight - 0.5) * 2;
-  
-  mouseX += (nx - mouseX) * 0.1;
-  mouseY += (ny - mouseY) * 0.1;
-  
-  targetMouseX = mouseX * vWidth;
-  targetMouseY = mouseY * vHeight;
-}
-
-function handleResize() {
+function onResize() {
   if (!isInitialized) return;
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  updateBoundaries();
-  initPositions();
 }
 
 function tick() {
-  const elapsedTime = clock.getElapsedTime();
+  const elapsed = clock ? clock.getElapsedTime() : 0;
 
-  // Orbit PointLights
-  cyanLight.position.x = Math.sin(elapsedTime * 0.6) * 6;
-  cyanLight.position.y = Math.cos(elapsedTime * 0.4) * 4;
-  cyanLight.position.z = Math.cos(elapsedTime * 0.6) * 6;
+  // Smooth camera tracking
+  targetX += (mouseX - targetX) * 0.03;
+  targetY += (mouseY - targetY) * 0.03;
 
-  purpleLight.position.x = -Math.sin(elapsedTime * 0.5) * 6;
-  purpleLight.position.y = -Math.cos(elapsedTime * 0.3) * 4;
-  purpleLight.position.z = -Math.cos(elapsedTime * 0.5) * 6;
-
-  // Camera Tilt Parallax
-  camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+  camera.position.x = targetX;
+  camera.position.y = 80 - targetY * 0.5;
   camera.lookAt(0, 0, 0);
 
-  let icosahedronIdx = 0;
-  let sphereIdx = 0;
-  let tetrahedronIdx = 0;
+  // Undulate the aurora particle wave
+  if (particleSystem) {
+    const posAttr = particleSystem.geometry.attributes.position;
+    const array = posAttr.array;
+    const cols = 40;
+    const rows = 30;
 
-  const yBound = vHeight + 1.2;
-  const xBound = vWidth + 1.2;
-  const repulsionRadius = 3.2;
+    let idx = 0;
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        // Multi-frequency wave calculation
+        const wave1 = Math.sin(i * 0.25 + elapsed * 1.2) * 14;
+        const wave2 = Math.cos(j * 0.3 + elapsed * 0.9) * 10;
+        const wave3 = Math.sin((i + j) * 0.15 + elapsed * 0.8) * 8;
 
-  items.forEach(item => {
-    // Drift physics
-    item.y += item.vy;
-    item.x += item.vx;
-    item.z += item.vz;
-
-    item.rx += item.rvx;
-    item.ry += item.rvy;
-    item.rz += item.rvz;
-
-    // Loop checks
-    if (item.y > yBound) {
-      item.y = -yBound;
-      item.x = (Math.random() - 0.5) * vWidth * 2.2;
+        array[idx * 3 + 1] = initialY[idx] + wave1 + wave2 + wave3;
+        idx++;
+      }
     }
-    if (item.x > xBound) item.x = -xBound;
-    if (item.x < -xBound) item.x = xBound;
-
-    // Mouse repulsion on X and Z axis
-    const dx = (item.x + item.ox) - targetMouseX;
-    const dy = (item.y + item.oy) - targetMouseY;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-
-    if (dist < repulsionRadius) {
-      const force = (repulsionRadius - dist) / repulsionRadius;
-      const angle = Math.atan2(dy, dx);
-      
-      const targetOx = Math.cos(angle) * force * 2.0;
-      const targetOz = Math.sin(angle) * force * 1.5;
-      
-      item.ox += (targetOx - item.ox) * 0.08;
-      item.oz += (targetOz - item.oz) * 0.08;
-    } else {
-      // Smooth return
-      item.ox += (0 - item.ox) * 0.04;
-      item.oz += (0 - item.oz) * 0.04;
-    }
-
-    dummy.position.set(item.x + item.ox, item.y + item.oy, item.z + item.oz);
-    dummy.rotation.set(item.rx, item.ry, item.rz);
-    dummy.scale.setScalar(item.scale);
-    dummy.updateMatrix();
-
-    if (item.type === 'icosahedron') {
-      glassIcosahedrons.setMatrixAt(icosahedronIdx++, dummy.matrix);
-    } else if (item.type === 'sphere') {
-      glassSpheres.setMatrixAt(sphereIdx++, dummy.matrix);
-    } else if (item.type === 'tetrahedron') {
-      glassTetrahedrons.setMatrixAt(tetrahedronIdx++, dummy.matrix);
-    }
-  });
-
-  glassIcosahedrons.instanceMatrix.needsUpdate = true;
-  glassSpheres.instanceMatrix.needsUpdate = true;
-  glassTetrahedrons.instanceMatrix.needsUpdate = true;
-
-  starField.rotation.y = elapsedTime * 0.005;
+    posAttr.needsUpdate = true;
+    particleSystem.rotation.y = elapsed * 0.02;
+  }
 
   renderer.render(scene, camera);
   animationFrameId = window.requestAnimationFrame(tick);
@@ -309,10 +204,9 @@ function tick() {
 
 export function toggleWebGL(play) {
   if (!isInitialized) return;
-  
   if (play) {
     if (!animationFrameId) {
-      clock.getDelta(); // Reset clock
+      clock.getDelta();
       tick();
     }
   } else {
@@ -322,3 +216,4 @@ export function toggleWebGL(play) {
     }
   }
 }
+

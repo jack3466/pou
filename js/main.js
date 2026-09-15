@@ -1,148 +1,165 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'aos/dist/aos.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import AOS from 'aos';
+import '../css/line-awesome.min.css';
+import '../css/style.css';
 import { initWebGL, toggleWebGL } from '../src/webgl.js';
-import { initAnimations, destroyAnimations } from '../src/animations.js';
+import { initAnimations } from '../src/animations.js';
 
-// Initialize Animate On Scroll (AOS)
-AOS.init({
-  offset: 100,
-  delay: 50,
-  duration: 800,
-  easing: 'ease-in-out',
-  once: true,
-  mirror: false,
-  anchorPlacement: 'top-bottom',
-});
-
-// ==========================================
-// Style Toggle Handlers
-// ==========================================
-const btnStyle1 = document.getElementById("btn-style-1");
-const btnStyle2 = document.getElementById("btn-style-2");
-
-function activateStyle1() {
-  document.body.classList.remove("style-2");
-  if (btnStyle1 && btnStyle2) {
-    btnStyle1.classList.add("active");
-    btnStyle2.classList.remove("active");
-  }
-  
-  // Initialize and run WebGL (default active in Style 1)
-  initWebGL();
-  toggleWebGL(true);
-  
-  // Destroy GSAP animations
-  destroyAnimations();
-}
-
-function activateStyle2() {
-  document.body.classList.add("style-2");
-  if (btnStyle1 && btnStyle2) {
-    btnStyle2.classList.add("active");
-    btnStyle1.classList.remove("active");
-  }
-  
-  // Initialize and run WebGL (also active in Style 2)
-  initWebGL();
-  toggleWebGL(true);
-  
-  // Initialize GSAP animations
-  initAnimations();
-}
-
-if (btnStyle1 && btnStyle2) {
-  btnStyle1.addEventListener("click", activateStyle1);
-  btnStyle2.addEventListener("click", activateStyle2);
-}
-
-// ==========================================
-// Headline Typewriter Animation
-// ==========================================
-const typewriterWords = [
-  "Technical Enthusiast",
-  "MBA Candidate",
-  "Project Leader",
-  "Team Lead",
-  "Problem Solver"
-];
-
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const typewriterElement = document.querySelector(".typewriter-text");
-
-function type() {
-  if (!typewriterElement) return;
-  
-  const currentWord = typewriterWords[wordIndex];
-  
-  if (isDeleting) {
-    typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
-    charIndex--;
-  } else {
-    typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
-    charIndex++;
-  }
-  
-  let typingSpeed = isDeleting ? 40 : 80;
-  
-  if (!isDeleting && charIndex === currentWord.length) {
-    typingSpeed = 1500;
-    isDeleting = true;
-  } else if (isDeleting && charIndex === 0) {
-    isDeleting = false;
-    wordIndex = (wordIndex + 1) % typewriterWords.length;
-    typingSpeed = 300;
-  }
-  
-  setTimeout(type, typingSpeed);
-}
-
-// Start typewriter effect and default 3D layout on page load
+// Initialize WebGL and Motion Interactions on DOM Ready
 window.addEventListener("DOMContentLoaded", () => {
-  type();
-  activateStyle1();
+  initWebGL();
+  toggleWebGL(true);
+  initAnimations();
+  initChipSelectors();
+  initLiveClock();
 });
 
 // ==========================================
-// Contact Form Handler
+// Interactive Project Inquiry Chip Selectors
 // ==========================================
-function handleContactSubmit(event) {
+let selectedServices = new Set(["Custom Web Application"]);
+let selectedTimeline = "Immediate (< 2 Weeks)";
+
+function initChipSelectors() {
+  const serviceChips = document.querySelectorAll('.chip-btn[data-group="service"]');
+  const timelineChips = document.querySelectorAll('.chip-btn[data-group="timeline"]');
+
+  serviceChips.forEach((chip) => {
+    chip.addEventListener('click', (e) => {
+      e.preventDefault();
+      const val = chip.getAttribute('data-value');
+      if (selectedServices.has(val)) {
+        if (selectedServices.size > 1) {
+          selectedServices.delete(val);
+          chip.classList.remove('active');
+        }
+      } else {
+        selectedServices.add(val);
+        chip.classList.add('active');
+      }
+    });
+  });
+
+  timelineChips.forEach((chip) => {
+    chip.addEventListener('click', (e) => {
+      e.preventDefault();
+      timelineChips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      selectedTimeline = chip.getAttribute('data-value');
+    });
+  });
+}
+
+// ==========================================
+// Live Client Local Time (IST)
+// ==========================================
+function initLiveClock() {
+  const clockEl = document.getElementById("client-local-time");
+  if (!clockEl) return;
+
+  function update() {
+    const now = new Date();
+    const options = {
+      timeZone: "Asia/Kolkata",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true
+    };
+    clockEl.textContent = new Intl.DateTimeFormat("en-US", options).format(now) + " IST";
+  }
+
+  update();
+  setInterval(update, 1000);
+}
+
+// ==========================================
+// Contact & Project Inquiry Form Handler
+// ==========================================
+async function handleContactSubmit(event) {
   event.preventDefault();
-  
-  const name = document.getElementById("contactName").value;
-  const email = document.getElementById("contactEmail").value;
-  const subject = document.getElementById("contactSubject").value;
-  const message = document.getElementById("contactMessage").value;
+
+  const submitBtn = event.target.querySelector('button[type="submit"]');
+  const originalBtnHtml = submitBtn ? submitBtn.innerHTML : 'Send Project Inquiry';
+
+  const name = document.getElementById("contactName").value.trim();
+  const email = document.getElementById("contactEmail").value.trim();
+  const message = document.getElementById("contactMessage").value.trim();
   const feedbackElement = document.getElementById("formFeedback");
-  
-  if (!feedbackElement) return;
-  
-  if (!name || !email || !subject || !message) {
-    showFeedback("Please fill out all fields.", "alert-danger");
+
+  if (!name || !email || !message) {
+    showFeedback("Please complete all required fields.", "alert-danger");
     return;
   }
-  
-  showFeedback("Thank you! Your message was sent successfully.", "alert-success");
-  document.getElementById("contactForm").reset();
-  
-  setTimeout(() => {
-    window.location.href = `mailto:ummar1852@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("Hi Ummar, my name is " + name + ".\n\n" + message)}`;
-  }, 1200);
+
+  const servicesText = Array.from(selectedServices).join(", ");
+
+  // Show loading indicator
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending Inquiry...';
+  }
+
+  try {
+    const res = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        services: servicesText,
+        timeline: selectedTimeline,
+        message
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.success) {
+      showFeedback("✨ Inquiry sent successfully! Ummar will review your project and get back to you within 24 hours.", "alert-success");
+      document.getElementById("contactForm").reset();
+    } else {
+      throw new Error(data.error || 'Failed to send message.');
+    }
+  } catch (error) {
+    console.warn('Direct API submission error, falling back to mail client:', error);
+    showFeedback("Direct inquiry received! Opening your email client to confirm dispatch...", "alert-info");
+    const fullBody = `Hi Ummar,\n\nMy name is ${name} (${email}).\n\nI am looking for: ${servicesText}\nTimeline: ${selectedTimeline}\n\nProject Overview:\n${message}`;
+    const mailtoUrl = `mailto:ummar1852@gmail.com?subject=${encodeURIComponent("New Project Inquiry from " + name)}&body=${encodeURIComponent(fullBody)}`;
+    setTimeout(() => {
+      window.location.href = mailtoUrl;
+    }, 1200);
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHtml;
+    }
+  }
+}
+
+function sendWhatsAppDirect() {
+  const name = document.getElementById("contactName") ? document.getElementById("contactName").value.trim() : "";
+  const servicesText = Array.from(selectedServices).join(", ");
+  const intro = name ? `Hi Ummar, this is ${name}.` : "Hi Ummar,";
+  const text = `${intro} I saw your portfolio and would like to discuss a project regarding: ${servicesText} (Timeline: ${selectedTimeline}).`;
+
+  const waUrl = `https://wa.me/918125763466?text=${encodeURIComponent(text)}`;
+  window.open(waUrl, "_blank");
 }
 
 function showFeedback(message, alertClass) {
   const feedbackElement = document.getElementById("formFeedback");
   if (!feedbackElement) return;
-  
+
   feedbackElement.textContent = message;
   feedbackElement.className = `mt-3 alert ${alertClass} d-block`;
-  
+
   setTimeout(() => {
     feedbackElement.className = "mt-3 alert d-none";
-  }, 5000);
+  }, 6000);
 }
 
 window.handleContactSubmit = handleContactSubmit;
+window.sendWhatsAppDirect = sendWhatsAppDirect;

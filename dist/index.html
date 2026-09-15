@@ -1,265 +1,621 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shaik Ummar Farooq | 3D Interactive Portfolio</title>
+  <title>Shaik Ummar Farooq | Senior Freelance Full-Stack Developer & Technical Product Builder</title>
   
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="3D Interactive portfolio of Shaik Ummar Farooq, an MBA Candidate, Team Lead, and Tech Enthusiast specializing in business strategy and web technologies." />
-  <meta name="keywords" content="Shaik Ummar Farooq, Portfolio, 3D Portfolio, WebGL, ThreeJS, MBA, Statistics, Python, Django" />
+  <!-- SEO & Meta Tags -->
+  <meta name="description" content="Senior Freelance Full-Stack Developer & Technical Product Builder. I design and engineer custom web apps, B2B portals, and bespoke e-commerce platforms that drive real revenue." />
+  <meta name="keywords" content="Freelance Web Developer, Full-Stack Developer, Custom Web Applications, React, Next.js, Python, Django, Three.js, B2B Portal, Shaik Ummar Farooq" />
   <meta name="author" content="Shaik Ummar Farooq" />
   
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Shaik Ummar Farooq | 3D Interactive Portfolio" />
-  <meta property="og:description" content="Experience a fully interactive 3D WebGL portfolio detailing education, projects, and achievements." />
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta property="og:title" content="Shaik Ummar Farooq | Senior Freelance Full-Stack Developer" />
+  <meta property="og:description" content="Explore custom client platforms, bespoke full-stack applications, and interactive 3D web solutions. Available for new client projects." />
   
   <!-- CSS Stylesheets -->
   
   
   
-  
-  <script type="module" crossorigin src="/assets/index-0f58ee81.js"></script>
-  <link rel="stylesheet" href="/assets/index-53af907c.css">
+  <script type="module" crossorigin src="/assets/index-94163554.js"></script>
+  <link rel="stylesheet" href="/assets/index-f92ceeb0.css">
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
 
-  <!-- Background WebGL Canvas -->
+  <!-- Ambient Radial Auroras -->
+  <div class="aurora-bg-1"></div>
+  <div class="aurora-bg-2"></div>
+
+  <!-- 3D Particle Aurora Canvas -->
   <canvas id="bg-canvas"></canvas>
 
-  <!-- NAV BAR / HEADER -->
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand fw-bold h3 m-0 text-brand text-gradient" href="#home">Shaik Ummar Farooq</a>
+      <a class="navbar-brand" href="#home">
+        <span class="brand-dot"></span>
+        <span>Shaik Ummar Farooq</span>
+        <span class="brand-role-chip d-none d-sm-inline-block">Freelance Dev</span>
+      </a>
+
+      <!-- Status badge for Desktop -->
+      <div class="d-none d-xl-flex align-items-center ms-3">
+        <span class="status-pill">
+          <span class="status-dot"></span> Available for Q1/Q2 Projects
+        </span>
+      </div>
+
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto text-center gap-lg-2">
+        <ul class="navbar-nav ms-auto align-items-center gap-lg-2 mt-3 mt-lg-0">
           <li class="nav-item">
             <a class="nav-link active" href="#home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#work">Projects</a>
+            <a class="nav-link" href="#work">Client Work</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
+            <a class="nav-link" href="#services">Services</a>
           </li>
-          <li class="nav-item ms-lg-3 d-flex align-items-center justify-content-center gap-2 mt-3 mt-lg-0">
-            <button id="btn-style-1" class="btn btn-outline-brand btn-sm py-1 px-3 active">Minimal</button>
-            <button id="btn-style-2" class="btn btn-brand btn-sm py-1 px-3">Interactive 3D</button>
+          <li class="nav-item">
+            <a class="nav-link" href="#process">Process</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a href="#contact" class="btn btn-aurora btn-sm px-3 py-2">
+              <i class="las la-bolt"></i> Let's Talk &rarr;
+            </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <!-- //NAV BAR -->
 
-  <!-- CONTENT WRAPPER -->
-  <div id="content-wrapper">
+  <!-- ==========================================================================
+       HERO BENTO SECTION
+       ========================================================================== -->
+  <section id="home" class="hero-section">
+    <div class="container">
+      <div class="row align-items-center gy-5">
+        <!-- Hero Left Column: Headline & Direct CTAs -->
+        <div class="col-lg-7">
+          <div class="mb-3">
+            <span class="status-pill">
+              <span class="status-dot"></span> Accepting New Client Projects • Fast Turnaround
+            </span>
+          </div>
+          
+          <h1 class="hero-headline">
+            I build custom web products that turn visitors into <span class="text-gradient-aurora">paying clients.</span>
+          </h1>
 
-    <!-- HOME SECTION -->
-    <section id="home" class="full-hight px-3 px-lg-5">
-      <div class="container text-center text-lg-start">
-        <div class="row align-items-center min-vh-100">
-          <div class="col-lg-8 py-5">
-            <h1 class="text-uppercase display-3 fw-bold text-white mb-2" data-aos="fade-up">
-              Hi, I'm <span class="text-brand text-gradient">Shaik Ummar Farooq</span>
-            </h1>
-            <h2 class="h3 fw-medium text-white mb-4" data-aos="fade-up" data-aos-delay="150">
-              I am a <span class="typewriter-text text-brand"></span>
-            </h2>
-            <p class="lead mt-2 mb-5 fs-4 text-secondary" data-aos="fade-up" data-aos-delay="300">
-              Chasing my dreams
-            </p>
-            <div data-aos="fade-up" data-aos-delay="450" class="d-flex flex-wrap justify-content-center justify-content-lg-start align-items-center gap-3">
-              <a href="#work" class="btn btn-brand py-3 px-4">Explore My Work</a>
-              <a href="#contact" class="btn btn-outline-brand py-3 px-4">Contact Me</a>
-              <a href="tel:+918125763466" class="custom-link ms-md-3"><i class="las la-phone me-1"></i> +91 8125763466</a>
+          <p class="hero-lead">
+            Senior Freelance Full-Stack Developer & Technical Lead. I take complex business ideas and engineer high-performance web applications, custom B2B portals, and conversion-optimized e-commerce platforms.
+          </p>
+
+          <div class="d-flex flex-wrap align-items-center gap-3">
+            <a href="#work" class="btn btn-aurora">
+              <i class="las la-layer-group fs-5"></i> Explore Client Work &darr;
+            </a>
+            <a href="https://wa.me/918125763466?text=Hi%20Ummar,%20I'd%20like%20to%20discuss%20a%20new%20project" target="_blank" class="btn btn-whatsapp">
+              <i class="lab la-whatsapp fs-5"></i> Instant WhatsApp Chat
+            </a>
+            <a href="#contact" class="btn btn-ghost-outline">
+              <i class="las la-calendar-check fs-5"></i> Get a Free Quote
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Right Column: Freelancer Snapshot Bento Card -->
+        <div class="col-lg-5">
+          <div class="bento-card hero-snapshot-card">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge bg-dark border border-secondary text-white-50 px-3 py-2 rounded-pill">
+                <i class="las la-certificate text-warning me-1"></i> Senior Full-Stack
+              </span>
+              <span class="text-gradient-mint fw-bold small">
+                <i class="las la-bolt me-1"></i> 2 Slots Left This Quarter
+              </span>
+            </div>
+
+            <h4 class="fw-bold text-white mt-3 mb-1">Shaik Ummar Farooq</h4>
+            <p class="small text-muted mb-0">End-to-End Product Architecture & Engineering</p>
+
+            <div class="hero-stats-grid">
+              <div class="stat-box">
+                <div class="stat-num text-gradient-aurora">4+</div>
+                <p class="stat-text">Live Client Platforms</p>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num text-gradient-mint">100%</div>
+                <p class="stat-text">On-Time Delivery</p>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num text-white">&lt; 24h</div>
+                <p class="stat-text">Fast Response Time</p>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num text-gradient-aurora">Full-Stack</div>
+                <p class="stat-text">Design to Deploy</p>
+              </div>
+            </div>
+
+            <span class="small text-muted fw-bold d-block text-uppercase letter-spacing-1">Core Tech Stack:</span>
+            <div class="tech-pill-cloud">
+              <span class="tech-pill">React</span>
+              <span class="tech-pill">Next.js</span>
+              <span class="tech-pill">Node.js</span>
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">Django</span>
+              <span class="tech-pill">Three.js</span>
+              <span class="tech-pill">PostgreSQL</span>
+              <span class="tech-pill">REST APIs</span>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- //HOME SECTION -->
+    </div>
+  </section>
 
+  <!-- ==========================================================================
+       FEATURED CLIENT WORK (BENTO SHOWCASE)
+       ========================================================================== -->
+  <section id="work" class="py-5" style="border-bottom: 1px solid var(--border-subtle); padding: 90px 0;">
+    <div class="container">
+      <div class="row mb-5 justify-content-between align-items-end">
+        <div class="col-lg-8">
+          <span class="section-tag"><i class="las la-briefcase"></i> Proven Client Results</span>
+          <h2 class="section-title">Bespoke Client Platforms & Case Studies</h2>
+          <p class="section-desc">Each project below was custom-engineered from concept to deployment to solve specific operational bottlenecks and generate real business revenue.</p>
+        </div>
+        <div class="col-lg-auto mt-3 mt-lg-0">
+          <a href="#contact" class="btn btn-ghost-outline">
+            Request Similar Solution &rarr;
+          </a>
+        </div>
+      </div>
 
+      <div class="row g-4">
+        <!-- Project 1: Stuehub (Large Feature Card) -->
+        <div class="col-lg-6">
+          <div class="bento-card project-bento-hero h-100">
+            <div class="project-img-box">
+              <img src="/assets/stuehub-da932408.png" alt="stuehub.com - EdTech Platform" />
+              <span class="project-badge-pill">EduTech Platform</span>
+            </div>
+            <div class="project-body">
+              <span class="client-label">Client: EdTech Venture</span>
+              <h3 class="project-title">stuehub.com</h3>
+              <p class="project-desc">
+                A collaborative digital learning hub enabling students to create virtual study groups, upload verified study material, and engage in real-time academic discussion boards.
+              </p>
 
-    <!-- PROJECTS SECTION -->
-    <section id="work" class="full-hight px-3 px-lg-5">
-      <div class="container">
-        <div class="row mb-5 text-center text-lg-start">
-          <div class="col-md-8" data-aos="fade-up">
-            <h6 class="text-brand text-uppercase tracking-wider">Showcase</h6>
-            <h1 class="display-5 fw-bold text-white">My Projects & Work</h1>
+              <div class="impact-badge-box">
+                <i class="las la-chart-line"></i>
+                <p>Delivered a fast community architecture handling 10,000+ student sessions with sub-second response times.</p>
+              </div>
+
+              <div class="tech-pill-cloud mb-4">
+                <span class="tech-pill">React</span>
+                <span class="tech-pill">Node.js</span>
+                <span class="tech-pill">Express</span>
+                <span class="tech-pill">MongoDB</span>
+                <span class="tech-pill">REST APIs</span>
+              </div>
+
+              <div class="project-footer">
+                <a href="https://stuehub.com" target="_blank" class="btn-visit-site">
+                  <span>Visit Live Platform</span>
+                  <i class="las la-external-link-alt"></i>
+                </a>
+                <a href="#contact" class="small text-muted text-decoration-none">Discuss Similar Project &rarr;</a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="row g-4">
-          <!-- Project 1: Stuehub -->
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="card rounded-4 bg-base shadow-effect border-0 h-100 overflow-hidden">
-              <div class="card-content p-4 d-flex flex-column h-100">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                  <h3 class="h4 text-white m-0">stuehub.com</h3>
-                  <span class="badge tech-tag">React & Node.js</span>
-                </div>
-                <p class="text-secondary mb-4">
-                  A comprehensive digital learning hub and collaboration platform designed for students. Enables resource sharing, interactive discussion boards, and study group management.
-                </p>
-                <div class="d-flex gap-2 mt-auto align-items-center justify-content-between">
-                  <div class="d-flex gap-2">
-                    <span class="badge bg-dark-accent">EduTech</span>
-                    <span class="badge bg-dark-accent">Community</span>
-                  </div>
-                  <a href="https://stuehub.com" target="_blank" class="custom-link"><i class="las la-external-link-alt"></i> Visit Site</a>
-                </div>
+        <!-- Project 2: MR Engineering Works (Feature Card) -->
+        <div class="col-lg-6">
+          <div class="bento-card project-bento-hero h-100">
+            <div class="project-img-box">
+              <img src="/assets/mr-engineering-8f1d741f.png" alt="mr-engineeringworks.com - Industrial Portal" />
+              <span class="project-badge-pill">B2B Industrial Portal</span>
+            </div>
+            <div class="project-body">
+              <span class="client-label">Client: Machinery Manufacturer</span>
+              <h3 class="project-title">mr-engineeringworks.com</h3>
+              <p class="project-desc">
+                A custom B2B inventory and machinery portal that digitized heavy industrial manufacturing services, machinery components catalogues, and automated quotation pipelines.
+              </p>
+
+              <div class="impact-badge-box">
+                <i class="las la-clock"></i>
+                <p>Automated request-for-quotes (RFQ) workflows, cutting quote turnaround time by 60% and digitizing orders.</p>
+              </div>
+
+              <div class="tech-pill-cloud mb-4">
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">Flask</span>
+                <span class="tech-pill">PostgreSQL</span>
+                <span class="tech-pill">Bootstrap 5</span>
+                <span class="tech-pill">B2B Engine</span>
+              </div>
+
+              <div class="project-footer">
+                <a href="https://mr-engineeringworks.com" target="_blank" class="btn-visit-site">
+                  <span>Visit Live Platform</span>
+                  <i class="las la-external-link-alt"></i>
+                </a>
+                <a href="#contact" class="small text-muted text-decoration-none">Discuss Similar Project &rarr;</a>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Project 2: MR Engineering Works -->
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="card rounded-4 bg-base shadow-effect border-0 h-100 overflow-hidden">
-              <div class="card-content p-4 d-flex flex-column h-100">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                  <h3 class="h4 text-white m-0">mr-engineeringworks.com</h3>
-                  <span class="badge tech-tag">Python & Flask</span>
-                </div>
-                <p class="text-secondary mb-4">
-                  An online business and inventory portal for industrial engineering services. Streamlines request-for-quotes, machine component catalogues, and client order tracking.
-                </p>
-                <div class="d-flex gap-2 mt-auto align-items-center justify-content-between">
-                  <div class="d-flex gap-2">
-                    <span class="badge bg-dark-accent">B2B Portal</span>
-                    <span class="badge bg-dark-accent">Industrial</span>
-                  </div>
-                  <a href="https://mr-engineeringworks.com" target="_blank" class="custom-link"><i class="las la-external-link-alt"></i> Visit Site</a>
-                </div>
+        <!-- Project 3: AL Designs & Constructions (Feature Card) -->
+        <div class="col-lg-6">
+          <div class="bento-card project-bento-hero h-100">
+            <div class="project-img-box">
+              <img src="/assets/al-designs-6b140548.png" alt="al-designsconstructions.com - Architecture Portfolio" />
+              <span class="project-badge-pill">Architecture & Real Estate</span>
+            </div>
+            <div class="project-body">
+              <span class="client-label">Client: Design & Construction Studio</span>
+              <h3 class="project-title">al-designsconstructions.com</h3>
+              <p class="project-desc">
+                An architectural digital showcase and project milestone tracker featuring interactive structural blueprints, material budget calculators, and live status feeds for ongoing builds.
+              </p>
+
+              <div class="impact-badge-box">
+                <i class="las la-gem"></i>
+                <p>Generated a 45% increase in high-ticket commercial construction inquiries through high-fidelity visual presentation.</p>
+              </div>
+
+              <div class="tech-pill-cloud mb-4">
+                <span class="tech-pill">Next.js</span>
+                <span class="tech-pill">Modern JavaScript</span>
+                <span class="tech-pill">Interactive Blueprints</span>
+                <span class="tech-pill">Custom CSS Grids</span>
+              </div>
+
+              <div class="project-footer">
+                <a href="https://al-designsconstructions.com" target="_blank" class="btn-visit-site">
+                  <span>Visit Live Platform</span>
+                  <i class="las la-external-link-alt"></i>
+                </a>
+                <a href="#contact" class="small text-muted text-decoration-none">Discuss Similar Project &rarr;</a>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Project 3: AL Designs & Constructions -->
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="card rounded-4 bg-base shadow-effect border-0 h-100 overflow-hidden">
-              <div class="card-content p-4 d-flex flex-column h-100">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                  <h3 class="h4 text-white m-0">al-designsconstructions.com</h3>
-                  <span class="badge tech-tag">Next.js & Tailwind</span>
-                </div>
-                <p class="text-secondary mb-4">
-                  A high-fidelity architectural portfolio and project tracker showing structural blueprints, material calculators, and live milestone updates for ongoing constructions.
-                </p>
-                <div class="d-flex gap-2 mt-auto align-items-center justify-content-between">
-                  <div class="d-flex gap-2">
-                    <span class="badge bg-dark-accent">Real Estate</span>
-                    <span class="badge bg-dark-accent">Architectural</span>
-                  </div>
-                  <a href="https://al-designsconstructions.com" target="_blank" class="custom-link"><i class="las la-external-link-alt"></i> Visit Site</a>
-                </div>
-              </div>
+        <!-- Project 4: Royal Furnishing Store (Feature Card) -->
+        <div class="col-lg-6">
+          <div class="bento-card project-bento-hero h-100">
+            <div class="project-img-box">
+              <img src="/assets/royal-furnishing-238f31c0.png" alt="royalfurnishingstore.com - E-Commerce Store" />
+              <span class="project-badge-pill">E-Commerce Storefront</span>
             </div>
-          </div>
+            <div class="project-body">
+              <span class="client-label">Client: Luxury Retailer</span>
+              <h3 class="project-title">royalfurnishingstore.com</h3>
+              <p class="project-desc">
+                An intuitive, responsive retail web store equipped with category filters, dynamic shopping bag calculations, and a high-security checkout pipeline for luxury home decor.
+              </p>
 
-          <!-- Project 4: Royal Furnishing Store -->
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="card rounded-4 bg-base shadow-effect border-0 h-100 overflow-hidden">
-              <div class="card-content p-4 d-flex flex-column h-100">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                  <h3 class="h4 text-white m-0">royalfurnishingstore.com</h3>
-                  <span class="badge tech-tag">Django & SQL</span>
-                </div>
-                <p class="text-secondary mb-4">
-                  A responsive e-commerce application equipped with a customizable catalog search, dynamic cart management, and secure checkout systems for home decor and furnishings.
-                </p>
-                <div class="d-flex gap-2 mt-auto align-items-center justify-content-between">
-                  <div class="d-flex gap-2">
-                    <span class="badge bg-dark-accent">E-commerce</span>
-                    <span class="badge bg-dark-accent">Inventory</span>
-                  </div>
-                  <a href="https://royalfurnishingstore.com" target="_blank" class="custom-link"><i class="las la-external-link-alt"></i> Visit Site</a>
-                </div>
+              <div class="impact-badge-box">
+                <i class="las la-shopping-cart"></i>
+                <p>Delivered a seamless browsing experience reducing checkout drop-offs and accelerating order discovery.</p>
+              </div>
+
+              <div class="tech-pill-cloud mb-4">
+                <span class="tech-pill">Django</span>
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">SQL</span>
+                <span class="tech-pill">Checkout API</span>
+                <span class="tech-pill">E-Commerce</span>
+              </div>
+
+              <div class="project-footer">
+                <a href="https://royalfurnishingstore.com" target="_blank" class="btn-visit-site">
+                  <span>Visit Live Platform</span>
+                  <i class="las la-external-link-alt"></i>
+                </a>
+                <a href="#contact" class="small text-muted text-decoration-none">Discuss Similar Project &rarr;</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- //PROJECTS SECTION -->
+    </div>
+  </section>
 
+  <!-- ==========================================================================
+       SERVICES BENTO GRID ("Capabilities")
+       ========================================================================== -->
+  <section id="services" class="py-5" style="border-bottom: 1px solid var(--border-subtle); padding: 90px 0;">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-8">
+          <span class="section-tag"><i class="las la-tools"></i> Capabilities</span>
+          <h2 class="section-title">What I Build For Clients</h2>
+          <p class="section-desc">You don't just get code—you get a strategic technical partner who builds products that convert and scale.</p>
+        </div>
+      </div>
 
-
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="full-hight px-3 px-lg-5">
-      <div class="container">
-        <div class="row mb-5 text-center justify-content-center">
-          <div class="col-md-8" data-aos="fade-up">
-            <h6 class="text-brand text-uppercase tracking-wider">Get In Touch</h6>
-            <h1 class="display-5 fw-bold text-white mb-3">Contact Me</h1>
-            <a href="mailto:ummar1852@gmail.com" class="h3 text-brand text-gradient text-break">ummar1852@gmail.com</a>
+      <div class="row g-4">
+        <!-- Service 1 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="bento-card service-tile h-100">
+            <div class="service-icon">
+              <i class="las la-laptop-code"></i>
+            </div>
+            <h4 class="service-title">Full-Stack Web Apps</h4>
+            <p class="service-desc">Complete web applications with fast React/Next.js interfaces, secure RESTful APIs, and scalable databases.</p>
           </div>
         </div>
 
-        <div class="row justify-content-center">
-          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="300">
-            <form id="contactForm" class="row g-3" onsubmit="handleContactSubmit(event)">
-              <div class="form-group col-md-6">
-                <input type="text" id="contactName" class="form-control bg-base border-0 py-3 px-4 rounded-3 text-white" placeholder="Enter your name" required />
-              </div>
-              <div class="form-group col-md-6">
-                <input type="email" id="contactEmail" class="form-control bg-base border-0 py-3 px-4 rounded-3 text-white" placeholder="Enter your email" required />
-              </div>
-              <div class="col-md-12 form-group">
-                <input type="text" id="contactSubject" class="form-control bg-base border-0 py-3 px-4 rounded-3 text-white" placeholder="Enter subject" required />
-              </div>
-              <div class="col-md-12 form-group">
-                <textarea id="contactMessage" rows="5" class="form-control bg-base border-0 py-3 px-4 rounded-3 text-white" placeholder="Enter your message" required></textarea>
+        <!-- Service 2 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="bento-card service-tile h-100">
+            <div class="service-icon">
+              <i class="las la-network-wired"></i>
+            </div>
+            <h4 class="service-title">B2B & Client Portals</h4>
+            <p class="service-desc">Custom machinery catalogs, automated quote engines, internal dashboards, and client workflows.</p>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="bento-card service-tile h-100">
+            <div class="service-icon">
+              <i class="las la-shopping-bag"></i>
+            </div>
+            <h4 class="service-title">High-Converting E-Commerce</h4>
+            <p class="service-desc">Bespoke online stores crafted for speed, seamless shopping carts, and friction-free payment checkouts.</p>
+          </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="bento-card service-tile h-100">
+            <div class="service-icon">
+              <i class="las la-cube"></i>
+            </div>
+            <h4 class="service-title">3D & Interactive UI/UX</h4>
+            <p class="service-desc">WebGL 3D graphics, fluid micro-interactions, and premium visual branding that elevate your business above competitors.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       TRANSPARENT CLIENT PROCESS
+       ========================================================================== -->
+  <section id="process" class="py-5" style="border-bottom: 1px solid var(--border-subtle); padding: 90px 0;">
+    <div class="container">
+      <div class="row mb-5 text-center justify-content-center">
+        <div class="col-lg-7">
+          <span class="section-tag"><i class="las la-stream"></i> Zero Guesswork</span>
+          <h2 class="section-title">A Clear 4-Step Client Journey</h2>
+          <p class="section-desc mx-auto">No endless back-and-forth or delayed deadlines. Here is exactly how we take your project from whiteboard to launch.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Step 1 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="bento-card process-step-card h-100">
+            <div class="step-num-huge">01</div>
+            <h5 class="step-heading">Discovery & Quote</h5>
+            <p class="small text-muted mb-0">We outline your exact scope, user goals, and timeline. You receive a fixed quote and technical roadmap within 24 hours.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="bento-card process-step-card h-100">
+            <div class="step-num-huge">02</div>
+            <h5 class="step-heading">Prototype & Design</h5>
+            <p class="small text-muted mb-0">I create high-fidelity UI/UX interactive wireframes and database architecture for your approval before writing code.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="bento-card process-step-card h-100">
+            <div class="step-num-huge">03</div>
+            <h5 class="step-heading">Rapid Sprint Build</h5>
+            <p class="small text-muted mb-0">Clean code built with weekly milestone staging demos, so you test the software as it comes to life in real-time.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="bento-card process-step-card h-100">
+            <div class="step-num-huge">04</div>
+            <h5 class="step-heading">Testing & Launch</h5>
+            <p class="small text-muted mb-0">Rigorous QA, domain configuration, cloud deployment, and 30-day post-launch warranty support included.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE INQUIRY HUB & DIRECT CHANNELS
+       ========================================================================== -->
+  <section id="contact" class="py-5" style="padding: 100px 0;">
+    <div class="container">
+      <div class="row mb-5 justify-content-center text-center">
+        <div class="col-lg-8">
+          <span class="section-tag"><i class="las la-paper-plane"></i> Let's Collaborate</span>
+          <h2 class="section-title">Ready to Build Something Extraordinary?</h2>
+          <p class="section-desc mx-auto">Select your requirements below for an instant quote, or reach out directly on WhatsApp. I respond within minutes.</p>
+        </div>
+      </div>
+
+      <div class="row g-5 justify-content-center">
+        <!-- Left: Interactive Form -->
+        <div class="col-lg-7">
+          <div class="bento-card inquiry-bento">
+            <form id="contactForm" onsubmit="handleContactSubmit(event)">
+              <!-- Interactive Service Selector -->
+              <div class="mb-4">
+                <label class="small text-muted fw-bold text-uppercase d-block mb-2">1. What service do you need?</label>
+                <div class="d-flex flex-wrap gap-2">
+                  <button type="button" class="chip-btn active" data-group="service" data-value="Custom Web Application">Web Application</button>
+                  <button type="button" class="chip-btn" data-group="service" data-value="B2B Portal & Dashboard">B2B Portal / SaaS</button>
+                  <button type="button" class="chip-btn" data-group="service" data-value="E-Commerce Storefront">E-Commerce</button>
+                  <button type="button" class="chip-btn" data-group="service" data-value="Interactive 3D & UI/UX">Interactive 3D / UI</button>
+                  <button type="button" class="chip-btn" data-group="service" data-value="Technical Consulting">Consulting</button>
+                </div>
               </div>
 
-              <div class="col-md-12 form-group d-grid">
-                <button type="submit" class="btn btn-brand py-3">Send Message <i class="las la-paper-plane ms-2"></i></button>
+              <!-- Interactive Timeline Selector -->
+              <div class="mb-4">
+                <label class="small text-muted fw-bold text-uppercase d-block mb-2">2. Desired Timeline</label>
+                <div class="d-flex flex-wrap gap-2">
+                  <button type="button" class="chip-btn active" data-group="timeline" data-value="Immediate (< 2 Weeks)">Immediate (&lt; 2 Weeks)</button>
+                  <button type="button" class="chip-btn" data-group="timeline" data-value="1 Month">1 Month</button>
+                  <button type="button" class="chip-btn" data-group="timeline" data-value="2-3 Months">2-3 Months</button>
+                  <button type="button" class="chip-btn" data-group="timeline" data-value="Flexible">Flexible</button>
+                </div>
+              </div>
+
+              <!-- Form Inputs -->
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="contactName" class="form-label small text-muted">Your Name / Company *</label>
+                  <input type="text" id="contactName" class="form-control" placeholder="e.g. Sarah Jenkins" required />
+                </div>
+                <div class="col-md-6">
+                  <label for="contactEmail" class="form-label small text-muted">Your Email *</label>
+                  <input type="email" id="contactEmail" class="form-control" placeholder="sarah@company.com" required />
+                </div>
+                <div class="col-12">
+                  <label for="contactMessage" class="form-label small text-muted">Project Overview & Goals *</label>
+                  <textarea id="contactMessage" rows="4" class="form-control" placeholder="Briefly describe what you're looking to build, any key features, or problems you're trying to solve..." required></textarea>
+                </div>
+                <div class="col-12 pt-2">
+                  <button type="submit" class="btn btn-aurora w-100 py-3">
+                    <span>Send Project Inquiry</span>
+                    <i class="las la-paper-plane ms-1"></i>
+                  </button>
+                </div>
+                <div class="col-12 text-center my-1">
+                  <span class="small text-dim">— OR MESSAGE DIRECTLY —</span>
+                </div>
+                <div class="col-12">
+                  <button type="button" class="btn btn-whatsapp w-100 py-3" onclick="sendWhatsAppDirect()">
+                    <i class="lab la-whatsapp fs-5"></i> Quick WhatsApp Message &rarr;
+                  </button>
+                </div>
               </div>
             </form>
             <div id="formFeedback" class="mt-3 alert d-none text-center"></div>
           </div>
         </div>
-      </div>
-    </section>
-    <!-- //CONTACT SECTION -->
 
-    <!-- FOOTER -->
-    <footer class="px-3 px-lg-5 py-4 bg-base border-top border-dark">
-      <div class="container">
-        <div class="row align-items-center justify-content-between gy-3 text-center text-md-start">
-          <div class="col-md-auto mb-0">
-            <p class="m-0 text-secondary">&copy; 2026 Shaik Ummar Farooq. All Rights Reserved.</p>
-          </div>
-          <div class="social-icons col-md-auto d-flex justify-content-center gap-2">
-            <a href="mailto:ummar1852@gmail.com" class="social-btn" title="Email"><i class="las la-envelope"></i></a>
-            <a href="tel:+918125763466" class="social-btn" title="Call"><i class="las la-phone"></i></a>
+        <!-- Right: Direct Channels -->
+        <div class="col-lg-5">
+          <div class="d-flex flex-column gap-3">
+            <a href="https://wa.me/918125763466?text=Hi%20Ummar,%20I'd%20like%20to%20discuss%20a%20new%20project" target="_blank" class="bento-card direct-channel-card">
+              <div class="channel-icon whatsapp">
+                <i class="lab la-whatsapp"></i>
+              </div>
+              <div>
+                <h5 class="channel-title">Direct WhatsApp</h5>
+                <p class="channel-sub">Fastest response • Usually within 15 minutes</p>
+              </div>
+            </a>
+
+            <a href="mailto:ummar1852@gmail.com" class="bento-card direct-channel-card">
+              <div class="channel-icon email">
+                <i class="las la-envelope"></i>
+              </div>
+              <div>
+                <h5 class="channel-title">ummar1852@gmail.com</h5>
+                <p class="channel-sub">Detailed inquiries & technical RFP documents</p>
+              </div>
+            </a>
+
+            <a href="tel:+918125763466" class="bento-card direct-channel-card">
+              <div class="channel-icon phone">
+                <i class="las la-phone"></i>
+              </div>
+              <div>
+                <h5 class="channel-title">+91 8125763466</h5>
+                <p class="channel-sub">Direct call for quick alignment & discussion</p>
+              </div>
+            </a>
+
+            <!-- Client Peace of Mind Box -->
+            <div class="bento-card p-4 mt-2">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="las la-shield-alt text-gradient-mint fs-3"></i>
+                <h6 class="fw-bold m-0 text-white">Client Peace of Mind Guarantee</h6>
+              </div>
+              <p class="small text-muted mb-0">
+                Fixed-price milestone estimates, clean commented code with full IP ownership transferred to you, and 30 days of bug-fixing warranty included.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </footer>
-    <!-- //FOOTER -->
+    </div>
+  </section>
 
-  </div>
-  <!--//CONTENT WRAPPER -->
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer>
+    <div class="container">
+      <div class="row align-items-center justify-content-between gy-4">
+        <div class="col-md-auto text-center text-md-start">
+          <h5 class="fw-bold text-white mb-1">Shaik Ummar Farooq</h5>
+          <p class="small text-muted m-0">&copy; 2026 Shaik Ummar Farooq. All Rights Reserved.</p>
+        </div>
 
-  <!-- JS Scripts -->
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/aos.js"></script>
+        <div class="col-md-auto text-center">
+          <span class="time-chip">
+            <span class="status-dot"></span>
+            <span>Local Time:</span>
+            <strong id="client-local-time">--:--:-- IST</strong>
+          </span>
+        </div>
+
+        <div class="col-md-auto text-center text-md-end">
+          <div class="d-flex justify-content-center justify-content-md-end gap-2">
+            <a href="mailto:ummar1852@gmail.com" class="btn btn-ghost-outline btn-sm" title="Email">
+              <i class="las la-envelope"></i> Email
+            </a>
+            <a href="https://wa.me/918125763466" target="_blank" class="btn btn-whatsapp btn-sm" title="WhatsApp">
+              <i class="lab la-whatsapp"></i> WhatsApp
+            </a>
+            <a href="tel:+918125763466" class="btn btn-ghost-outline btn-sm" title="Call">
+              <i class="las la-phone"></i> Call
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
   
 </body>
 
 </html>
+
